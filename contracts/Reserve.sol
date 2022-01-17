@@ -57,7 +57,7 @@ contract Reserve {
     }
     
 
-    function exchange(bool isBuy, uint _amount, address from) public payable returns(uint)  {
+    function exchange(bool isBuy, uint _amount, address payable from) public payable returns(uint)  {
         
         if(isBuy) {
             
@@ -77,7 +77,7 @@ contract Reserve {
             exchangeAmount = _amount * sellRate / fixedUnit;
             require(exchangeAmount <= thisAddr.balance);
             
-            payable(from).transfer(exchangeAmount);
+            from.transfer(exchangeAmount);
             return exchangeAmount;
 
         }
