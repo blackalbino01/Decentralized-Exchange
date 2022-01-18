@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity 0.8.10;
 import "@openzeppelin/contracts/interfaces/IERC20.sol";
 
@@ -74,8 +75,8 @@ contract Reserve {
             require( token.allowance( msg.sender, contractAddr ) == _amount );
             token.transferFrom(msg.sender, contractAddr, _amount);
             
-            exchangeAmount = _amount * sellRate / fixedUnit;
-            require(exchangeAmount <= thisAddr.balance);
+            uint exchangeAmount = _amount * sellRate / fixedUnit;
+            require(exchangeAmount <= contractAddr.balance);
             
             from.transfer(exchangeAmount);
             return exchangeAmount;

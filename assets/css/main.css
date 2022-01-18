@@ -20,7 +20,7 @@ input {
   top: 0;
   left: 0;
   width: 100%;
-  height: 860px;
+  height: 100vh;
   background: url(/assets/images/backgrounds/landing-page.png) bottom;
   background-size: cover;
   z-index: -1;
@@ -28,13 +28,13 @@ input {
 
 .main-title {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .main-content {
-  width: 525px;
+  width: 450px;
   max-width: 100%;
-  padding-top: 30px;
+  padding-top: 10px;
   margin: 0 auto;
   border-radius: 10px;
   box-shadow: 0 42px 154px 0 rgba(1,1,1,.16);
@@ -84,7 +84,7 @@ input {
   color: #fff;
   border-radius: 30px;
   display: block;
-  margin: 50px auto 0;
+  margin: 20px auto 0;
   padding: 16px 10px;
   width: 245px;
   text-align: center;
@@ -203,12 +203,12 @@ input {
 }
 
 .input-container--mt {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .input-title {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .input-group {
@@ -227,9 +227,9 @@ input {
 .input-item,
 .input-placeholder {
   width: 100%;
-  padding: 20px 20px 20px 100px;
+  padding: 15px 15px 15px 80px;
   text-align: right;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 500;
   color: #caccd9;
 }
@@ -251,31 +251,22 @@ input {
 
 /*========= Import Account =========*/
 .import-account {
-  margin-top: 45px;
-  padding: 20px 25px;
+  padding: 15px 25px;
   background-color: rgba(26,32,64,.1);
 }
 
-.import-account__title {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.import-account__container {
-  display: flex;
-  justify-content: space-between;
-}
 
 .import-account__item {
-  width: 32%;
-  font-size: 12px;
+  width: 50%;
+  font-size: 16px;
   font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #caccd9;
   margin-bottom: 15px;
-  padding: 10px 0;
+  margin: auto;
+  padding: 20px 0;
   border-radius: 22px;
   box-shadow: 0 6px 14px 0 rgba(0,0,0,.04);
   background-color: #29315d;
@@ -289,53 +280,18 @@ input {
   pointer-events: none;
 }
 
-.import-account__icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.import-account__icon.metamask {
-  background-image: url(/assets/images/logos/metamask.svg);
-}
-
-.import-account__icon.keystore {
-  background-image: url(/assets/images/logos/keystore.svg);
-}
-
-.import-account__icon.private-key {
-  background-image: url(/assets/images/logos/private-key.svg);
-}
-
-.import-account__name {
-
-}
-
 .import-account__item:hover {
   background-color: #9ea7d0;
   color: #323c70;
 }
 
-.import-account__item:hover .import-account__icon.metamask {
-  background-image: url(/assets/images/logos/metamask-active.svg);
-}
 
-.import-account__item:hover .import-account__icon.keystore {
-  background-image: url(/assets/images/logos/keystore-active.svg);
-}
-
-.import-account__item:hover .import-account__icon.private-key {
-  background-image: url(/assets/images/logos/private-key-active.svg);
-}
 /*========= End Import Account =========*/
 
 /*========= Swap =========*/
 .swap {
   display: none;
-  padding: 40px 50px 0;
+  padding: 20px 50px 0;
 }
 
 .swap.active {
@@ -345,8 +301,8 @@ input {
 .swap__icon {
   width: 32px;
   height: 32px;
-  margin: 30px auto;
-  background-image: url(/assets/images/icons/swap.svg);
+  margin: 10px auto;
+  background-image: url(../images/icons/swap.svg);
   cursor: pointer;
   transition: all .3s;
 }
@@ -356,17 +312,6 @@ input {
 }
 
 .swap__rate {
-  margin-top: 15px;
+  margin-top: 8px;
 }
 /*========= End Swap =========*/
-
-/*========= Transfer =========*/
-.transfer {
-  display: none;
-  padding: 40px 50px 0;
-}
-
-.transfer.active {
-  display: block;
-}
-/*========= End Transfer =========*/

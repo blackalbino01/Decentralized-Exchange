@@ -1,20 +1,14 @@
-const Token = artifacts.require("Token");
-const FoodVendor = artifacts.require("FoodVendor");
+const Reserve = artifacts.require("Reserve");
+const Exchange = artifacts.require("Exchange");
 
 
 module.exports = async function (deployer) {
-  // Deploy Token
-  await deployer.deploy(Token);
-  const token = await Token.deployed()
+  // Deploy Reserve
+  await deployer.deploy(Reserve, '0xdac17f958d2ee523a2206206994597c13d831ec7');
+  await Reserve.deployed()
 
-  // Deploy FoodVendor
-  await deployer.deploy(FoodVendor, token.address);
-  const foodVendor = await FoodVendor.deployed();
+  // Deploy Exchange
+  await deployer.deploy(Exchange);
+  await Exchange.deployed();
 
-  function tokens(n) {
-    return web3.utils.toWei(n, 'ether');
-  }
-
-  // Transfer all tokens to FoodVendor (1 million)
-  await token.transfer(foodVendor.address, tokens('1000000'));
 };

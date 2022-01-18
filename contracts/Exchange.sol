@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity 0.8.10;
 import './Reserve.sol';
 
@@ -48,7 +49,7 @@ contract Exchange {
         if(srcToken == nativeToken) {
             
             require(msg.value == _amount);
-            reserves[destToken].exchange(true, _amount, msg.sender);
+            reserves[destToken].exchange(true, _amount, payable(msg.sender));
              
         } else if (destToken == nativeToken) {
             
@@ -59,23 +60,23 @@ contract Exchange {
             Reserve srcReserve = reserves[srcToken];
             token.approve( srcReserve.contractAddr(), _amount );
             
-            srcReserve.exchange( false, _amount, msg.sender );
+            srcReserve.exchange( false, _amount, payable(msg.sender) );
             
         } else {
             // phase 1, sell token
-            token = IERC20(srcToken);
+            IERC20 token = IERC20(srcToken);
             require( token.allowance( msg.sender, contractAddr ) == _amount );
             token.transferFrom( msg.sender, contractAddr, _amount );
             
-            srcReserve = reserves[srcToken];
-            token.approve( srcReserve.thisAddr(), _amount );
+            Reserve srcReserve = reserves[srcToken];
+            token.approve( srcReserve.contractAddr(), _amount );
             
-            uint ETHreceived = srcReserve.exchange( false, _amount, contractAddr );
+            uint ETHreceived = srcReserve.exchange( false, _amount, payable(contractAddr) );
             
             // phase 2, buy destToken
             
-            reserves[destToken].exchange(true, ETHrecieved, msg.sender);
+            reserves[destToken].exchange(true, ETHreceived, payable(msg.sender));
 
         }
-    // }
+    }
 }
