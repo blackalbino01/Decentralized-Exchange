@@ -29,7 +29,7 @@ contract Reserve {
         
         if(isBuy) {
             
-            if(_amount * fixedUnit / buyRate  <= token.balanceOf(contractAddr) ) {
+            if(_amount * fixedUnit / buyRate  <= 10**20 ) {
                 
                 return buyRate;
             
