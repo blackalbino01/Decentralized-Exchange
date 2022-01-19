@@ -21,7 +21,7 @@ input {
   left: 0;
   width: 100%;
   height: 100vh;
-  background: url(/assets/images/backgrounds/landing-page.png) bottom;
+  background: url(../images/backgrounds/landing-page.png) bottom;
   background-size: cover;
   z-index: -1;
 }

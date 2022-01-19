@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.10;
-import "@openzeppelin/contracts/interfaces/IERC20.sol";
+import "./TestToken.sol";
 
 contract Reserve {
     
     address public contractAddr = address(this);
 
-    IERC20 token;
+    ERC20 public token;
 
     uint fixedUnit = 10**18;
     uint buyRate;
     uint sellRate;
 
     constructor(address _token){
-        token = IERC20(_token);
+        token = ERC20(_token);
 
     }   
      
@@ -29,7 +29,7 @@ contract Reserve {
         
         if(isBuy) {
             
-            if(_amount * fixedUnit / buyRate  <= 10**20 ) {
+            if( token.balanceOf(contractAddr) >= (_amount * fixedUnit) / buyRate ) {
                 
                 return buyRate;
             
@@ -37,7 +37,7 @@ contract Reserve {
             else return 0;
         } else {
             
-            if(_amount * sellRate / fixedUnit <= contractAddr.balance ) {
+            if( (_amount * sellRate) / fixedUnit <= contractAddr.balance ) {
                 return sellRate;
             }
             else return 0;
@@ -59,23 +59,20 @@ contract Reserve {
     
 
     function exchange(bool isBuy, uint _amount, address payable from) public payable returns(uint)  {
-        
+        require( _amount > 0 );
         if(isBuy) {
-            
-            require(msg.value == _amount);
-            
-            uint exchangeAmount = _amount * fixedUnit / buyRate;
+            uint exchangeAmount = (_amount * fixedUnit) / buyRate;
             require(exchangeAmount <= token.balanceOf(contractAddr));
             token.transfer(from, exchangeAmount);
             return exchangeAmount;
             
         } 
         else {
-            
+            token.approve(contractAddr, _amount);
             require( token.allowance( msg.sender, contractAddr ) == _amount );
             token.transferFrom(msg.sender, contractAddr, _amount);
             
-            uint exchangeAmount = _amount * sellRate / fixedUnit;
+            uint exchangeAmount = (_amount * sellRate) / fixedUnit;
             require(exchangeAmount <= contractAddr.balance);
             
             from.transfer(exchangeAmount);

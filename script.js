@@ -1,3 +1,4 @@
+const TestToken = artifacts.require("TestToken");
 const Reserve = artifacts.require("Reserve");
 const Exchange = artifacts.require("Exchange");
 
@@ -16,19 +17,17 @@ module.exports = async function(callback) {
 
 		const trader = accounts[1]
 
-		const reserve = await Reserve.new('0xdac17f958d2ee523a2206206994597c13d831ec7',{from: owner});
+		const testToken = await TestToken.new();
+		const reserve = await Reserve.new(testToken.address,{from: owner});
 		const exchange = await Exchange.new();
 
-		let move = await ludo.moveMarker( [57,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1],1,13, 6, { from: manager});
+		await testToken.transfer(reserve.address, tokens('1000000'));
 
-		let random = await ludo.random({ from: manager});
+		const balance = await reserve.getTokenBalance()
+		console.log(balance.toString())
+		let rate = await reserve.getExchangeRate(true,3000,{ from: owner});
 
-		let arr = [];
-		for (var i = 0; i < move[0].length; i++) {
-			arr.push(move[0][i].toNumber())
-		}
-		console.log(arr, move[1], move[2]);
-		console.log(random.toNumber())
+		console.log(rate.toNumber())
 	}
 
 	catch(error){
