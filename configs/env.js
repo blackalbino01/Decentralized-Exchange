@@ -8,8 +8,8 @@ const EnvConfig = {
 
   TOKENS: [
     {
-      "name": 'TomoChain',
-      "symbol": 'TOMO',
+      "name": 'Ether',
+      "symbol": 'Eth',
       address: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
     },
     /* TODO: Change to your own deployed tokens. Remember to put 2 tokens here to support token to token swapping */
